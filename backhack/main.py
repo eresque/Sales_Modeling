@@ -46,8 +46,6 @@ def getInfo(date: datetime.date = '2023-07-02'):
     df=pd.read_csv("./data/df.csv")
     df['Начало нед'] = pd.to_datetime(df['Начало нед'])
     user_inp=pd.to_datetime(date)
-    print(type(df['Начало нед']))
-    print(type(user_inp))
     filtered_df = df[df['Начало нед'] <= user_inp]
     sorted_df = filtered_df.sort_values(by='Начало нед', ascending=False)
     closest_date = sorted_df.iloc[0]['Начало нед']
@@ -61,5 +59,5 @@ def getInfo(date: datetime.date = '2023-07-02'):
     for col in non_numerical_columns:
         non_numeric_features.append(col)
 
-    output = rf_model.predict(df.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
+    output = rf_model.predict(next_28_rows.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
     return {"message":str(output)}
