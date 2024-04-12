@@ -42,8 +42,9 @@ def upload(file: UploadFile = File(...)):
     return {"message": f"Successfuly uploaded {file.filename}"}
 
 @app.get("/main")
-def getInfo(date: datetime.date = '27.03.2023'):
-    df=pd.read_csv('data/df.csv')
+def getInfo(date: datetime.date = '2023-07-02'):
+    df=pd.read_csv('data/df_v0.csv')
+    print(df.columns)
     rf_model = joblib.load("model/rf_100.joblib")
     non_numerical_columns = df.select_dtypes(exclude=['number']).columns.tolist()
 
