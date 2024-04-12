@@ -43,9 +43,8 @@ def upload(file: UploadFile = File(...)):
 
 @app.get("/main")
 def getInfo(date: datetime.date = '2023-07-02'):
-    df=pd.read_csv('data/df_v0.csv')
-    print(df.columns)
-    rf_model = joblib.load("model/rf_100.joblib")
+    df=pd.read_csv("./data/df.csv")
+    rf_model = joblib.load("./model/rf_100.joblib")
     non_numerical_columns = df.select_dtypes(exclude=['number']).columns.tolist()
 
     non_numeric_features = []
@@ -54,4 +53,4 @@ def getInfo(date: datetime.date = '2023-07-02'):
         non_numeric_features.append(col)
 
     output = rf_model.predict(df.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
-    return {"message":output}
+    return {"message":str(output)}
