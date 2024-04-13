@@ -2,16 +2,16 @@ version: '3'
 services:
   frontend:
     container_name: frontend
-    image:
-      front
+    build:
+      context: ./fronthack
     ports:
       - 3000:3000
     depends_on:
       - backend
   backend:
     container_name: backend
-    image:
-      back
+    build:
+      context: ./backhack
     ports:
       - 8000:8000
     restart: always
