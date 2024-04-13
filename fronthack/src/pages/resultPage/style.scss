@@ -63,6 +63,10 @@
                         @media (width < 890px) {
                             height: 150px;
                         }
+
+                        @media (width >= 1760px) {
+                            height: 300px;
+                        }
                     }
                 }
             }
