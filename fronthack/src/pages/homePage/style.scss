@@ -50,26 +50,41 @@
                 height: 210px;
                 flex-grow: 1;
                 flex-basis: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background-image: radial-gradient(farthest-corner at 100% 0px,
+                        #6A98F5,
+                        $light-gray 50%);
+                gap: 20px;
             }
         }
     }
 
-    .explanation-model {
-        margin-bottom: 60px;
+    // .explanation-model {
+    //     margin-bottom: 60px;
 
-        .list-models {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            height: 210px;
-            background: $invisible;
+    //     .list-models {
+    //         display: flex;
+    //         flex-wrap: wrap;
+    //         gap: 20px;
+    //         height: 210px;
+    //         background: $invisible;
 
-            div {
-                height: 210px;
-                min-width: 300px;
-                flex-grow: 1;
-                flex-basis: 0;
-            }
-        }
-    }
+    //         .home-page .guide .list-steps div {
+    //             min-width: 300px;
+    //             height: 210px;
+    //             flex-grow: 1;
+    //             flex-basis: 0;
+    //             display: flex;
+    //             flex-direction: column;
+    //             justify-content: center;
+    //             gap: 20px;
+
+    //             h3 {
+    //                 display: flex;
+    //             }
+    //         }
+    //     }
+    // }
 }

@@ -12,17 +12,20 @@ const HomePage = (): JSX.Element => {
                 <h3 className="question-1">Как пользоваться приложением?</h3>
                 <div className='list-steps'>
                     <Block className='step-1'>
-                        <h3>Шаг 1</h3>
+                        <h2>Шаг 1</h2>
+                        <h3>Выберите модель</h3>
                     </Block>
                     <Block className='step-2'>
-                        <h3>Шаг 2</h3>
+                        <h2>Шаг 2</h2>
+                        <h3>Введите данные</h3>
                     </Block>
                     <Block className='step-3'>
-                        <h3>Шаг 3</h3>
+                        <h2>Шаг 3</h2>
+                        <h3>Нажмите на "Старт"</h3>
                     </Block>
                 </div>
             </div>
-            <div className="explanation-model">
+            {/* <div className="explanation-model">
                 <h3 className="question-2">Чем отличаются модели друг от друга?</h3>
                 <div className='list-models'>
                     <Block className='base-model'>
@@ -32,7 +35,7 @@ const HomePage = (): JSX.Element => {
                         <h3>Продвинутая модель</h3>
                     </Block>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
