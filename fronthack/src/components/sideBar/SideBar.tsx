@@ -15,7 +15,7 @@ type SideBaeProps = {
 
 const SideBar = (props: SideBaeProps): JSX.Element => {
     const [inputDate, setInputDate] = useState<string>('');
-    const [file, setFile] = useState<File>();
+    const [_, setFile] = useState<File>();
     const [model, setModel] = useState<string>('');
     let res: Array<string> = [];
     let resTwo: Array<string> = [];
