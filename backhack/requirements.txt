@@ -8,3 +8,5 @@ plotly
 nbformat
 kaleido
 shap
+matplotlib
+seaborn
