@@ -51,11 +51,6 @@ def getgraphs(df, model, non_numeric_features):
     
     df=df.drop(non_numeric_features, axis=1)
     
-    if os.path.isfile('files/scratch.png'):
-    # Удаляем файл, если он существует
-        os.remove('files/scratch.png')
-    else:
-        pass
     # explain the model's predictions using SHAP
     # (same syntax works for LightGBM, CatBoost, `scikit-learn, transformers, Spark, etc.)
     explainer = shap.Explainer(model)
@@ -66,6 +61,7 @@ def getgraphs(df, model, non_numeric_features):
     fig = shap.plots.waterfall(shap_values[0],show=False)
     plt.tight_layout()
     plt.savefig('files/scratch.png')
+    plt.clf()
 
 
 
