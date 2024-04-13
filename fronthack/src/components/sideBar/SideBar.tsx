@@ -19,6 +19,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
     const [model, setModel] = useState<string>('');
     let res: Array<string> = [];
     let resTwo: Array<string> = [];
+    let obj: any = {}
     const navigate = useNavigate();
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,13 +43,13 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
             })
                 .then((response) => {
                     // navigate('/result');
-                    // console.log(response.data.message);
+                    console.log(response.data.files);
                     // props.setData(response.data.files);
                     res = response.data.files;
                     // localStorage.setItem('data', response.data.files);
                 })
                 .then(() => {
-                    res.forEach((item) => {
+                    res.forEach((item, index) => {
                         axios({
                             url: `http://127.0.0.1:8000/getFile?path=${item}`,
                             method: "GET",
@@ -56,6 +57,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                         })
                             .then(responseTwo => {
                                 let image = URL.createObjectURL(responseTwo.data)
+                                obj[item] = image;
                                 resTwo.push(image);
                                 console.log(image);
                             })
@@ -69,7 +71,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                 .then(() => {
                     navigate('/result');
                     console.log('lol');
-                    props.setData(resTwo)
+                    props.setData(obj)
                 })
                 .catch((error) => {
                     navigate('/warning');

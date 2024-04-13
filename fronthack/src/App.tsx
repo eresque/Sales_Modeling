@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const App = () => {
 
-    const [data, setData] = useState<Array<string>>();
+    const [data, setData] = useState<any>();
     console.log(data)
 
     return (
