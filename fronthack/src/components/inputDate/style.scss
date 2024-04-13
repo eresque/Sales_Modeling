@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+
+.input-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $white;
+    border: none;
+    border-radius: 15px;
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 20px;
+    cursor: text;
+
+    &:focus {
+        outline-color: $gray;
+    }
+}
