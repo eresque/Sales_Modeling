@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 
 app = FastAPI()
 
+rf_model = joblib.load("./model/rf_100.joblib")
+
 origins = [
     'http://localhost:3000',
     'http://localhost:5173',
@@ -71,10 +73,9 @@ def getgraphs(df, model, non_numeric_features):
 def getFile(path:str="filename"):
     return FileResponse(f"files/{path}")
 
-@app.post("/main")
-def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
+@app.post("/getcsv")
+def getcsv(file: UploadFile = None):
     fileinfo = "no file"
-    output = ""
     if file is not None:
         try:
             contents = file.file.read()
@@ -86,6 +87,11 @@ def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
         finally:
             file.file.close()
             fileinfo = f"Successfuly uploaded {file.filename}"
+        return {"message":fileinfo}
+
+@app.get("/main")
+def getInfo(date: datetime.date = '2023-07-02'):
+    output = ""
     df = pd.read_csv("./data/df.csv")
     df['Начало нед'] = pd.to_datetime(df['Начало нед'])
     user_inp = pd.to_datetime(date)
@@ -94,7 +100,6 @@ def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
     closest_date = sorted_df.iloc[0]['Начало нед']
     index = df[df['Начало нед'] == closest_date].index[0]
     next_28_rows = df.iloc[index:index + 28]
-    rf_model = joblib.load("./model/rf_100.joblib")
     non_numerical_columns = next_28_rows.select_dtypes(exclude=['number']).columns.tolist()
 
     non_numeric_features = []
@@ -108,8 +113,6 @@ def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
 
     getgraphs(next_28_rows, rf_model, non_numeric_features)
     
-    if file is not None:
-        os.remove(file.filename)
     file_names = []
     
     # Check if the folder path exists
