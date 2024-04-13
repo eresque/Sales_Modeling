@@ -13,10 +13,10 @@ import matplotlib.pyplot as plt
 app = FastAPI()
 
 origins = [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:5173'
+    'http://5.35.29.99:3000',
+    'http://5.35.29.99:5173',
+    'http://5.35.29.99:3000',
+    'http://5.35.29.99:5173'
 ]
 app.add_middleware(
     CORSMiddleware,
