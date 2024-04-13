@@ -6,6 +6,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_percentage_error
 import joblib
+import os
 
 app = FastAPI()
 
@@ -59,4 +60,11 @@ def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
         non_numeric_features.append(col)
 
     output = rf_model.predict(next_28_rows.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
+    curf=[]
+    cwd=os.getcwd()
+    curf=os.listdir(cwd)
+    print(curf)
+    os.remove(file.filename)
+    curf=os.listdir(cwd)
+    print(curf)   
     return {"message":{"outp":str(output), "file": fileinfo}}
