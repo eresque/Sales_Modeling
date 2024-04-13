@@ -38,7 +38,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
             })
             
             try {
-                const res = await axios.post('', {
+                const res = await axios.post('http://127.0.0.1/main:8000', {
                     model,
                     inputDate,
                     file
