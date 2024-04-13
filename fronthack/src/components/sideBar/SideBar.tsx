@@ -6,7 +6,7 @@ import Button from '../button/Button';
 import InputChoice from '../inputChoice/InputChoice';
 import InputDate from '../inputDate/InputDate';
 import InputFile from '../inputFile/InputFile';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './style.scss';
 
 type SideBaeProps = {
@@ -55,18 +55,21 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                             responseType: 'blob'
                         })
                             .then(responseTwo => {
-                                navigate('/result');
                                 let image = URL.createObjectURL(responseTwo.data)
                                 resTwo.push(image);
                                 console.log(image);
                             })
-                            .then(() => localStorage.setItem('data', JSON.stringify(resTwo)))
                             .catch((error) => {
                                 navigate('/warning');
                                 console.log(error);
                                 props.setData(undefined);
                             });
                     })
+                })
+                .then(() => {
+                    navigate('/result');
+                    console.log('lol');
+                    props.setData(resTwo)
                 })
                 .catch((error) => {
                     navigate('/warning');
@@ -86,7 +89,9 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
     return (
         <div className="side-bar">
             <div className="logo">
-                <img src={logo} alt="Логотип" />
+                <Link className='logo-link' to='/'>
+                    <img src={logo} alt="Логотип" />
+                </Link>
             </div>
             <div className="input-bar">
                 <form className='form-data' name='form' onSubmit={handleSubmit} >

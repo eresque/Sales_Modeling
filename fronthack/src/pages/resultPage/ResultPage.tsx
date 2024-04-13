@@ -4,15 +4,22 @@ import png from '../../img/logo.png';
 import download from '../../img/download.svg';
 import home from '../../img/home.svg';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import './style.scss'
 
-// type ResultPageProps = {
-//     data: Array<string>
-// }
+type ResultPageProps = {
+    data: Array<string>
+}
 
-const ResultPage = (): JSX.Element => {
+const ResultPage = (props: ResultPageProps): JSX.Element => {
+    const [_, setValue] = useState(0);
 
-    const data = localStorage.getItem('data')
+    setTimeout(() => {
+        // useForceUpdate();
+        console.log(props.data);
+        setValue(100);
+        // ResultPage.forceUpdate();
+    }, 2000);
 
     return (
         <div className="result-page">
@@ -21,10 +28,10 @@ const ResultPage = (): JSX.Element => {
                 <Block className='block-res'>
                     <div className='list-dashboards'>
                         <Block className='dashboard-1'>
-                            <img src={JSON.parse(data!)[0]} alt="" />
+                            <img src={props.data[0]} alt="" />
                         </Block>
                         <Block className='dashboard-2'>
-                            <img src={JSON.parse(data!)[1]} alt="" />
+                            <img src={props.data[2]} alt="" />
                         </Block>
                     </div>
                     <a

@@ -35,14 +35,35 @@
             .list-dashboards {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
                 background: $light-gray;
-                height: 458px;
+                // height: 458px;
                 gap: 20px;
     
                 div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     background: $white;
                     flex-grow: 1;
                     flex-basis: 0;
+
+                    img {
+                        display: flex;
+                        height: 300px;
+
+                        @media (width < 1030px) {
+                            height: 250px;
+                        }
+
+                        @media (width < 960px) {
+                            height: 200px;
+                        }
+
+                        @media (width < 890px) {
+                            height: 150px;
+                        }
+                    }
                 }
             }
 
@@ -84,6 +105,7 @@
         flex-direction: row;
         align-items: center;
         margin-bottom: 60px;
+        gap: 40px;
 
         @media (width < 1250px) {
             flex-direction: column;
@@ -135,15 +157,15 @@
             background: $invisible;
 
             .btn-home {
-                position: absolute;
+                position: static;
                 width: 226px;
                 height: 73px;
                 right: 0;
-                top: 732px;
+                // top: 732px;
 
-                @media (width < 1250px) {
-                    position: static;
-                }
+                // @media (width < 1250px) {
+                //     position: static;
+                // }
             }
         }
     }

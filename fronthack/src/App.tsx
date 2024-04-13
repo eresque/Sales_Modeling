@@ -13,23 +13,27 @@ const App = () => {
 
     return (
         <>
-            <div className="grad-background"/>
+            <div className="grad-background" />
             <SideBar setData={setData} />
             <Routes>
-                <Route 
-                    path='/' 
+                <Route
+                    path='/'
                     element={<HomePage />}
                 />
-                { localStorage.getItem('data') == undefined || localStorage.getItem('data') == null ?
-                    <Route 
-                        path='/warning' 
+                {data == undefined || data == null ?
+                    <Route
+                        path='/warning'
                         element={<WarningPage />}
                     /> :
-                    <Route 
-                        path='/result' 
-                        element={<ResultPage />}
+                    <Route
+                        path='/result'
+                        element={<ResultPage data={data} />}
                     />
                 }
+                {/* <Route
+                    path="*"
+                    element={<Navigate to="/" replace />}
+                /> */}
             </Routes>
         </>
     )

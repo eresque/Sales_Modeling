@@ -14,10 +14,14 @@
         margin-bottom: 32px;
         background: $invisible;
 
-        img {
-            width: 70px;
-            height: 65px;
+        .logo-link {
             background: $invisible;
+
+            img {
+                width: 70px;
+                height: 65px;
+                background: $invisible;
+            }
         }
     }
 
@@ -54,7 +58,7 @@
                         display: flex;
                         align-items: center;
                         background: $invisible;
-    
+
                         .inner {
                             display: flex;
                             align-items: center;
@@ -67,13 +71,13 @@
                             color: $white;
                             cursor: pointer;
                         }
-        
+
                         .tooltip {
                             display: none;
                             position: absolute;
                         }
                     }
-    
+
                     .wrapper:hover .tooltip {
                         display: block;
                         z-index: 999999999999;
