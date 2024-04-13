@@ -49,7 +49,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                     // localStorage.setItem('data', response.data.files);
                 })
                 .then(() => {
-                    res.forEach((item, index) => {
+                    res.forEach((item) => {
                         axios({
                             url: `http://127.0.0.1:8000/getFile?path=${item}`,
                             method: "GET",
