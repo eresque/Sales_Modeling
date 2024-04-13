@@ -26,27 +26,18 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
         event.preventDefault();
         console.log('submit');
 
-        if (inputDate && file && model) {
-            // props.setData({
-            //     model: model,
-            //     date: inputDate,
-            //     file: file
-            // });
+        if (inputDate && model) {
 
-            const formdata = new FormData();
-            formdata.append("file", file);
+            // const formdata = new FormData();
+            // formdata.append("file", file);
 
             axios({
                 url: `http://127.0.0.1:8000/main?date=${inputDate}`,
-                method: "POST",
-                data: formdata
+                method: "GET"
             })
                 .then((response) => {
-                    // navigate('/result');
                     console.log(response.data.files);
-                    // props.setData(response.data.files);
                     res = response.data.files;
-                    // localStorage.setItem('data', response.data.files);
                 })
                 .then(() => {
                     res.forEach((item) => {
