@@ -27,14 +27,54 @@
         flex-direction: column;
         gap: 35px;
 
-        .list-dashboards {
+        .block-res {
             display: flex;
-            background: $invisible;
-            height: 458px;
+            flex-direction: column;
+            gap: 20px;
 
-            div {
-                flex-grow: 1;
-                flex-basis: 0;
+            .list-dashboards {
+                display: flex;
+                flex-direction: row;
+                background: $light-gray;
+                height: 458px;
+                gap: 20px;
+    
+                div {
+                    background: $white;
+                    flex-grow: 1;
+                    flex-basis: 0;
+                }
+            }
+
+            .download-results {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                background-color: $black;
+                width: 240px;
+                height: 60px;
+                border-radius: 15px;
+                gap: 10px;
+
+                &:hover {
+                    background: $light-black;
+                    transition: 0.1s;
+                    cursor: pointer;
+                }
+
+                .icon-download {
+                    display: flex;
+                    width: 30px;
+                    background: $invisible;
+                    transform: rotate(180deg);
+                }
+
+                .message-download {
+                    display: flex;
+                    font-size: 20px;
+                    color: $white;
+                }
             }
         }
     }
@@ -99,7 +139,7 @@
                 width: 226px;
                 height: 73px;
                 right: 0;
-                top: 612px;
+                top: 732px;
 
                 @media (width < 1250px) {
                     position: static;

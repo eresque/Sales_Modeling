@@ -1,11 +1,13 @@
 import Block from '../../components/block/Block';
 import Button from '../../components/button/Button';
+import png from '../../img/logo.png';
+import download from '../../img/download.svg';
 import home from '../../img/home.svg';
 import { Link } from 'react-router-dom';
 import './style.scss'
 
 type ResultPageProps = {
-    data: string
+    data: object
 }
 
 const ResultPage = (props: ResultPageProps): JSX.Element => {
@@ -13,11 +15,26 @@ const ResultPage = (props: ResultPageProps): JSX.Element => {
         <div className="result-page">
             <h1 className="result-name">Результаты вычислений</h1>
             <div className="results">
-                <div className='list-dashboards'>
-                    <Block className='dashboard-1'>
-                        <h3>{props.data}</h3>
-                    </Block>
-                </div>
+                <Block className='block-res'>
+                    <div className='list-dashboards'>
+                        <Block className='dashboard-1'>
+                            <h3>{Object.values(props.data)[0]}</h3>
+                        </Block>
+                        <Block className='dashboard-2'>
+                            <h3>{Object.values(props.data)[1]}</h3>
+                        </Block>
+                    </div>
+                    <a
+                        className="download-results"
+                        href={png}
+                        download="Результаты вычислений"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <img className="icon-download" src={download} alt="Скачать результаты" />
+                        <h4 className="message-download">Скачать .zip</h4>
+                    </a>
+                </Block>
             </div>
             <div className="help">
                 <div className="help-text">

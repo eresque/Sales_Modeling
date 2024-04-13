@@ -10,7 +10,7 @@ type InputChoiceProps = {
 
 const InputChoice = (props: InputChoiceProps): JSX.Element => {
     const [value, setValue] = useState<string>('');
-    const arOptions: Array<string> = ['Базовая модель', 'Продвинутая модель'];
+    const arOptions: Array<string> = ['XGBoost'];
 
     const options = arOptions.map((text, index) => {
         return <option key={index} value={text}>{text}</option>;

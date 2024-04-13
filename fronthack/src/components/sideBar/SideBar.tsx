@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import logo from '../../img/logo.png';
 import download from '../../img/download.svg';
 import Button from '../button/Button';
@@ -9,14 +9,8 @@ import InputFile from '../inputFile/InputFile';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 
-type objData = {
-    model: string;
-    date: string;
-    file: File
-}
-
 type SideBaeProps = {
-    setData: React.Dispatch<React.SetStateAction<objData | undefined>>
+    setData: React.Dispatch<React.SetStateAction<any>>
 };
 
 const SideBar = (props: SideBaeProps): JSX.Element => {
@@ -27,44 +21,36 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        navigate('/result')
-        console.log('submit')
+        console.log('submit');
 
         if (inputDate && file && model) {
-            props.setData({
-                model: model,
-                date: inputDate,
-                file: file
-            })
+            navigate('/result');
+            // props.setData({
+            //     model: model,
+            //     date: inputDate,
+            //     file: file
+            // });
 
             const formdata = new FormData();
-            formdata.append(
-                "file",
-                file,
-            )
+            formdata.append("file", file);
 
             axios({
                 url: `http://127.0.0.1:8000/main?date=${inputDate}`,
                 method: "POST",
-                data: formdata,
+                data: formdata
             })
-                .then((res) => {
-                    console.log(res.data)
+                .then((response) => {
+                    // console.log(response.data.message);
+                    props.setData(response.data.message);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-
-            // try {
-
-            //     const res = await axios.post(`http://127.0.0.1:8000/main?date=${inputDate}`, data: formdata)
-            //     console.log(res.data)
-            // } catch (error) {
-            //     console.log(error);
-            // }
-            // fetchData(input);
         }
-    }
+        else {
+            navigate('/warning');
+        }
+    };
 
     const handleChangeInput: React.ChangeEventHandler<HTMLInputElement> = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputDate(event.target.value);
