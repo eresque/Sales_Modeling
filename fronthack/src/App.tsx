@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const App = () => {
 
-    const [data, setData] = useState<object>();
+    const [data, setData] = useState<Array<string>>();
     console.log(data)
 
     return (
@@ -20,7 +20,7 @@ const App = () => {
                     path='/' 
                     element={<HomePage />}
                 />
-                { data == undefined || data == null ?
+                { localStorage.getItem('data') == undefined || localStorage.getItem('data') == null ?
                     <Route 
                         path='/warning' 
                         element={<WarningPage />}

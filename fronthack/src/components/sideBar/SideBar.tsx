@@ -17,6 +17,8 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
     const [inputDate, setInputDate] = useState<string>('');
     const [file, setFile] = useState<File>();
     const [model, setModel] = useState<string>('');
+    let res: Array<string> = [];
+    let resTwo: Array<string> = [];
     const navigate = useNavigate();
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -39,10 +41,32 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                 data: formdata
             })
                 .then((response) => {
-                    navigate('/result');
+                    // navigate('/result');
                     // console.log(response.data.message);
-                    props.setData(response.data.message);
-                    localStorage.setItem('data', response.data.message);
+                    // props.setData(response.data.files);
+                    res = response.data.files;
+                    // localStorage.setItem('data', response.data.files);
+                })
+                .then(() => {
+                    res.forEach((item) => {
+                        axios({
+                            url: `http://127.0.0.1:8000/getFile?path=${item}`,
+                            method: "GET",
+                            responseType: 'blob'
+                        })
+                            .then(responseTwo => {
+                                navigate('/result');
+                                let image = URL.createObjectURL(responseTwo.data)
+                                resTwo.push(image);
+                                console.log(image);
+                            })
+                            .then(() => localStorage.setItem('data', JSON.stringify(resTwo)))
+                            .catch((error) => {
+                                navigate('/warning');
+                                console.log(error);
+                                props.setData(undefined);
+                            });
+                    })
                 })
                 .catch((error) => {
                     navigate('/warning');
@@ -109,6 +133,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                         <Button
                             className="btn-submit"
                             text="Старт"
+                            onClick={() => localStorage.clear()}
                         />
                     </div>
                 </form>

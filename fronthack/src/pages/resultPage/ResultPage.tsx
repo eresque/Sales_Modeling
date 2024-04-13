@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import './style.scss'
 
 // type ResultPageProps = {
-//     data: object
+//     data: Array<string>
 // }
 
 const ResultPage = (): JSX.Element => {
@@ -21,10 +21,10 @@ const ResultPage = (): JSX.Element => {
                 <Block className='block-res'>
                     <div className='list-dashboards'>
                         <Block className='dashboard-1'>
-                            <h3>{Object.values(data!)[0]}</h3>
+                            <img src={JSON.parse(data!)[0]} alt="" />
                         </Block>
                         <Block className='dashboard-2'>
-                            <h3>{Object.values(data!)[1]}</h3>
+                            <img src={JSON.parse(data!)[1]} alt="" />
                         </Block>
                     </div>
                     <a
