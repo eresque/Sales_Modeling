@@ -27,7 +27,7 @@ const App = () => {
                     /> :
                     <Route 
                         path='/result' 
-                        element={<ResultPage data={data}/>}
+                        element={<ResultPage />}
                     />
                 }
             </Routes>

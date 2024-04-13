@@ -6,11 +6,11 @@ import home from '../../img/home.svg';
 import { Link } from 'react-router-dom';
 import './style.scss'
 
-type ResultPageProps = {
-    data: object
-}
+// type ResultPageProps = {
+//     data: object
+// }
 
-const ResultPage = (props: ResultPageProps): JSX.Element => {
+const ResultPage = (): JSX.Element => {
 
     const data = localStorage.getItem('data')
 
