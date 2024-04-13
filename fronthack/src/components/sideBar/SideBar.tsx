@@ -24,7 +24,6 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
         console.log('submit');
 
         if (inputDate && file && model) {
-            navigate('/result');
             // props.setData({
             //     model: model,
             //     date: inputDate,
@@ -40,11 +39,15 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                 data: formdata
             })
                 .then((response) => {
+                    navigate('/result');
                     // console.log(response.data.message);
                     props.setData(response.data.message);
+                    localStorage.setItem('data', response.data.message);
                 })
                 .catch((error) => {
+                    navigate('/warning');
                     console.log(error);
+                    props.setData(undefined);
                 });
         }
         else {

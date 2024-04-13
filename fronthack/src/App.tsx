@@ -20,7 +20,7 @@ const App = () => {
                     path='/' 
                     element={<HomePage />}
                 />
-                { data == undefined ?
+                { data == undefined || data == null ?
                     <Route 
                         path='/warning' 
                         element={<WarningPage />}

@@ -11,6 +11,9 @@ type ResultPageProps = {
 }
 
 const ResultPage = (props: ResultPageProps): JSX.Element => {
+
+    const data = localStorage.getItem('data')
+
     return (
         <div className="result-page">
             <h1 className="result-name">Результаты вычислений</h1>
@@ -18,10 +21,10 @@ const ResultPage = (props: ResultPageProps): JSX.Element => {
                 <Block className='block-res'>
                     <div className='list-dashboards'>
                         <Block className='dashboard-1'>
-                            <h3>{Object.values(props.data)[0]}</h3>
+                            <h3>{Object.values(data!)[0]}</h3>
                         </Block>
                         <Block className='dashboard-2'>
-                            <h3>{Object.values(props.data)[1]}</h3>
+                            <h3>{Object.values(data!)[1]}</h3>
                         </Block>
                     </div>
                     <a

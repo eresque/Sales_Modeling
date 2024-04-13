@@ -6,8 +6,10 @@ import './style.scss';
 const WindowPage = (): JSX.Element => {
     return (
         <div className="warning-page">
-            <h1 className="warning-name">Упс! Вышла ошибочка</h1>
-            <h5 className="emoji-idn">🤷‍♂️</h5>
+            <div className="warning-box">
+                <h1 className="warning-name">Упс! Ошибочка вышла</h1>
+                <h5 className="emoji-idn">🤷‍♂️</h5>
+            </div>
             <div className="help">
                 <div className="help-text">
                     <h2 className="help-message">Забыли, как пользоваться? Жми сюда</h2>

@@ -10,19 +10,41 @@
     gap: 40px;
     width: calc(100% - 450px - 80px);
 
-    .warning-name {
+    .warning-box {
+        display: flex;
+        flex-direction: column;
         color: $white;
         background: $invisible;
-        padding-top: 4px;
-        height: 68px;
 
-        @media (width < 1068px) {
-            height: 136px;
+        .warning-name {
+            display: flex;
+            color: $white;
+            background: $invisible;
+            padding-top: 4px;
+            width: 100%;
+            height: 68px;
+    
+            @media (width < 1029px) {
+                height: 136px;
+            }
+
+            @media (width < 870px) {
+                height: 267px;
+            }
         }
-    }
+    
+        .emoji-idn {
+            display: flex;
+            background: $invisible;
 
-    .emoji-idn {
-        background: $invisible;
+            @media (870px <= width < 1029px) {
+                font-size: 100px;
+            }
+
+            @media (width < 870px) {
+                display: none;
+            }
+        }
     }
 
     // .warnings {
@@ -103,7 +125,7 @@
                 width: 226px;
                 height: 73px;
                 right: 0;
-                top: 612px;
+                top: 311px;
 
                 @media (width < 1250px) {
                     position: static;
