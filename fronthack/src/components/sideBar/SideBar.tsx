@@ -36,17 +36,32 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                 date: inputDate,
                 file: file
             })
-            
-            try {
-                const res = await axios.post('http://127.0.0.1:8000/main', {
-                    //model,
-                    inputDate,
-                    file
+
+            const formdata = new FormData();
+            formdata.append(
+                "file",
+                file,
+            )
+
+            axios({
+                url: `http://127.0.0.1:8000/main?date=${inputDate}`,
+                method: "POST",
+                data: formdata,
+            })
+                .then((res) => {
+                    console.log(res.data)
                 })
-                console.log(res.data)
-            } catch (error) {
-                console.log(error);
-            }
+                .catch((error) => {
+                    console.log(error);
+                });
+
+            // try {
+
+            //     const res = await axios.post(`http://127.0.0.1:8000/main?date=${inputDate}`, data: formdata)
+            //     console.log(res.data)
+            // } catch (error) {
+            //     console.log(error);
+            // }
             // fetchData(input);
         }
     }
