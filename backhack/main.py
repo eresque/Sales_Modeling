@@ -30,11 +30,9 @@ def root():
     return {"message": "I'm working!"}
 
 
-def getgraphs():
-    df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-    df = df.loc[(df["Date"] >= "2016-07-01") & (df["Date"] <= "2016-12-01")]
+def getgraphs(df):
 
-    fig = px.line(df, x='Date', y='AAPL.High')
+    fig = px.line(df, x='Начало нед', y='Продажи, рубли')
     fig.update_xaxes(ticks="outside",
                      ticklabelmode="period",
                      tickcolor="black",
@@ -42,25 +40,15 @@ def getgraphs():
                      minor=dict(
                          ticklen=4,
                          dtick=7 * 24 * 60 * 60 * 1000,
-                         tick0="2016-07-03",
                          griddash='dot',
                          gridcolor='white')
                      )
-    fig.write_image('pictures/linear.png')
+    fig.write_image('files/linear.png')
 
 
-def zipfiles(directory):
-    # Define the path to the directory containing the files
-
-    # Create a ZipFile object to write to a new zip file
-    with zipfile.ZipFile('output.zip', 'w') as zipf:
-        # Iterate over all the files in the directory
-        for root, _, files in os.walk(directory):
-            for file in files:
-                file_path = os.path.join(root, file)
-                # Add each file to the zip archive
-                zipf.write(file_path, arcname=os.path.relpath(file_path, directory))
-
+@app.get("/getFile")
+def getFile(path:str="filename"):
+    return FileResponse(f"files/{path}")
 
 @app.post("/main")
 def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
@@ -94,9 +82,18 @@ def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
         non_numeric_features.append(col)
 
     output = rf_model.predict(next_28_rows.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
-    getgraphs()
+    next_28_rows['Продажи, рубли']=output
+    getgraphs(next_28_rows)
     
     if file is not None:
         os.remove(file.filename)
-    zipfiles('pictures')
-    return FileResponse(path='output.zip',media_type='application/octet-stream', filename='output.zip')
+    file_names = []
+    
+    # Check if the folder path exists
+    if os.path.exists('files'):
+        # Iterate over all files in the folder
+        for file_name in os.listdir('files'):
+            # Check if the path is a file (not a directory)
+            if os.path.isfile(os.path.join('files', file_name)):
+                file_names.append(file_name)
+    return {"files": file_names}
