@@ -32,7 +32,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
             // formdata.append("file", file);
 
             axios({
-                url: `http://127.0.0.1:8000/main?date=${inputDate}`,
+                url: `http://5.35.29.99:8000/main?date=${inputDate}`,
                 method: "GET"
             })
                 .then((response) => {
@@ -42,7 +42,7 @@ const SideBar = (props: SideBaeProps): JSX.Element => {
                 .then(() => {
                     res.forEach((item) => {
                         axios({
-                            url: `http://127.0.0.1:8000/getFile?path=${item}`,
+                            url: `http://5.35.29.99:8000/getFile?path=${item}`,
                             method: "GET",
                             responseType: 'blob'
                         })
