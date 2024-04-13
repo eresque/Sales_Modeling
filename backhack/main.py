@@ -33,32 +33,32 @@ def root():
 
 
 def getgraphs(df, model, non_numeric_features):
-    #
-    # fig = px.line(df, x='Начало нед', y='Продажи, рубли')
-    # fig.update_xaxes(ticks="outside",
-    #                  ticklabelmode="period",
-    #                  tickcolor="black",
-    #                  ticklen=10,
-    #                  minor=dict(
-    #                      ticklen=4,
-    #                      dtick=7 * 24 * 60 * 60 * 1000,
-    #                      griddash='dot',
-    #                      gridcolor='white')
-    #                  )
-    # fig.write_image('files/linear.png')
-    #
-    # df=df.drop(non_numeric_features, axis=1)
-    #
-    # # explain the model's predictions using SHAP
-    # # (same syntax works for LightGBM, CatBoost, `scikit-learn, transformers, Spark, etc.)
-    # explainer = shap.Explainer(model)
-    # shap_values = explainer(df.drop('Продажи, рубли', axis=1))
-    #
-    # # visualize the first prediction's explanation
-    #
-    # fig = shap.plots.waterfall(shap_values[0],show=False)
-    # plt.savefig('files/scratch.png')
-    pass
+    
+    fig = px.line(df, x='Начало нед', y='Продажи, рубли')
+    fig.update_xaxes(ticks="outside",
+                     ticklabelmode="period",
+                     tickcolor="black",
+                     ticklen=10,
+                     minor=dict(
+                         ticklen=4,
+                         dtick=7 * 24 * 60 * 60 * 1000,
+                         griddash='dot',
+                         gridcolor='white')
+                     )
+    fig.write_image('files/linear.png')
+    
+    df=df.drop(non_numeric_features, axis=1)
+    
+    # explain the model's predictions using SHAP
+    # (same syntax works for LightGBM, CatBoost, `scikit-learn, transformers, Spark, etc.)
+    explainer = shap.Explainer(model)
+    shap_values = explainer(df.drop('Продажи, рубли', axis=1))
+    
+    # visualize the first prediction's explanation
+    
+    fig = shap.plots.waterfall(shap_values[0],show=False)
+    plt.tight_layout()
+    plt.savefig('files/scratch.png')
 
 
 
@@ -99,6 +99,7 @@ def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
 
     output = rf_model.predict(next_28_rows.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
     next_28_rows['Продажи, рубли']=output
+    next_28_rows.to_excel("files/prediction.xlsx", index=False)
 
     getgraphs(next_28_rows, rf_model, non_numeric_features)
     

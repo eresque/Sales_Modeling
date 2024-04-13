@@ -10,3 +10,4 @@ kaleido
 shap
 matplotlib
 seaborn
+openpyxl
