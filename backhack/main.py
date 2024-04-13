@@ -27,22 +27,21 @@ app.add_middleware(
 def root():
     return {"message": "I'm working!"}
 
-@app.post("/upload")
-def upload(file: UploadFile = File(...)):
-    try:
-        contents = file.file.read()
-        print(contents)
-        with open(file.filename, 'wb') as f:
-            f.write(contents)
-    except Exception:
-        return {"message": "there was an error uploading file"}
-    finally:
-        file.file.close()
-
-    return {"message": f"Successfuly uploaded {file.filename}"}
-
-@app.get("/main")
-def getInfo(date: datetime.date = '2023-07-02'):
+@app.post("/main")
+def getInfo(date: datetime.date = '2023-07-02', file: UploadFile = None):
+    fileinfo="no file"
+    output=""
+    if file is not None:
+        try:
+            contents = file.file.read()
+            print(contents)
+            with open(file.filename, 'wb') as f:
+                f.write(contents)
+        except Exception:
+            fileinfo="there was an error uploading file"
+        finally:
+            file.file.close()
+            fileinfo = f"Successfuly uploaded {file.filename}"
     df=pd.read_csv("./data/df.csv")
     df['Начало нед'] = pd.to_datetime(df['Начало нед'])
     user_inp=pd.to_datetime(date)
@@ -60,4 +59,4 @@ def getInfo(date: datetime.date = '2023-07-02'):
         non_numeric_features.append(col)
 
     output = rf_model.predict(next_28_rows.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
-    return {"message":str(output)}
+    return {"message":{"outp":str(output), "file": fileinfo}}
