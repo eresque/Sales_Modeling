@@ -100,7 +100,7 @@ def getInfo(date: datetime.date = '2023-07-02'):
     for col in non_numerical_columns:
         non_numeric_features.append(col)
 
-    output = rf_model.predict(next_28_rows.drop(non_numeric_features, axis=1).drop('Продажи, рубли', axis=1))
+    output = rf_model.predict(next_28_rows.drop(non_numeric_features, axis=1).drop(['Продажи, рубли', 'Продажи, упаковки'], axis=1))
     next_28_rows['Продажи, рубли']=output
     next_28_rows.to_excel("files/prediction.xlsx", index=False)
 
