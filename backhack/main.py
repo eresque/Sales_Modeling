@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 app = FastAPI()
 
-rf_model = joblib.load("./model/rf_100.joblib")
+rf_model = joblib.load("./model/model_xgb.joblib")
 
 origins = [
     'http://5.35.29.99:3000',
