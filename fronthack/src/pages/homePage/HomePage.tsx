@@ -17,7 +17,7 @@ const HomePage = (): JSX.Element => {
                     </Block>
                     <Block className='step-2'>
                         <h2>Шаг 2</h2>
-                        <h3>Введите данные</h3>
+                        <h3>Введите дату</h3>
                     </Block>
                     <Block className='step-3'>
                         <h2>Шаг 3</h2>

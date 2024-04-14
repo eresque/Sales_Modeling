@@ -112,5 +112,5 @@ def getInfo(date: datetime.date = '2023-07-02'):
         for file_name in os.listdir('files'):
             if os.path.isfile(os.path.join('files', file_name)):
                 file_names.append(file_name)
-                
+
     return {"files": file_names}
