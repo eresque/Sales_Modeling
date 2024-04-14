@@ -51,13 +51,10 @@ def getgraphs(df, model, non_numeric_features):
     
     df=df.drop(non_numeric_features, axis=1)
     
-    # explain the model's predictions using SHAP
-    # (same syntax works for LightGBM, CatBoost, `scikit-learn, transformers, Spark, etc.)
     explainer = shap.Explainer(model)
     shap_values = explainer(df.drop('Продажи, рубли', axis=1))
     
-    # visualize the first prediction's explanation
-    
+
     fig = shap.plots.waterfall(shap_values[0],show=False)
     plt.tight_layout()
     plt.savefig('files/scratch.png')
@@ -110,12 +107,10 @@ def getInfo(date: datetime.date = '2023-07-02'):
     getgraphs(next_28_rows, rf_model, non_numeric_features)
     
     file_names = []
-    
-    # Check if the folder path exists
+
     if os.path.exists('files'):
-        # Iterate over all files in the folder
         for file_name in os.listdir('files'):
-            # Check if the path is a file (not a directory)
             if os.path.isfile(os.path.join('files', file_name)):
                 file_names.append(file_name)
+                
     return {"files": file_names}
