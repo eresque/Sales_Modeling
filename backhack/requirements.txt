@@ -11,3 +11,5 @@ shap
 matplotlib
 seaborn
 openpyxl
+xgb
+xgboost
